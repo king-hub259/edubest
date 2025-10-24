@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
-import 'package:infixedu/app/database/auth_database.dart';
-import 'package:infixedu/app/utilities/message/snack_bars.dart';
+import 'package:flutter/material.dart';
+import 'package:edubest/app/database/auth_database.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
@@ -34,6 +34,21 @@ class InvalidInputException extends AppException {
   InvalidInputException([String? message]) : super(message, "Invalid Input: ");
 }
 
+void _showSnackBar(String message) {
+  final context = Get.context;
+  if (context != null) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        backgroundColor: Colors.redAccent,
+        behavior: SnackBarBehavior.floating,
+      ),
+    );
+  } else {
+    debugPrint("SnackBar Message: $message");
+  }
+}
+
 dynamic returnResponse(http.Response response) {
   final AuthDatabase authDatabase = AuthDatabase.instance;
   debugPrint(response.body);
@@ -41,35 +56,37 @@ dynamic returnResponse(http.Response response) {
     case HttpStatus.ok:
       var responseJson = json.decode(response.body.toString());
       return responseJson;
+
     case HttpStatus.badRequest:
       throw BadRequestException(response.body.toString());
+
     case HttpStatus.found:
-      showBasicFailedSnackBar(message: 'Something went wrong'.tr);
+      _showSnackBar('Something went wrong'.tr);
       throw BadRequestException(response.body.toString());
+
     case HttpStatus.conflict:
       var responseJson = json.decode(response.body.toString());
       return responseJson;
+
     case HttpStatus.unauthorized:
-      showBasicFailedSnackBar(
-          message: json.decode(response.body.toString())["message"]);
+      _showSnackBar(json.decode(response.body.toString())["message"]);
 
       if (json.decode(response.body.toString())["message"] ==
           'Unauthenticated.') {
         authDatabase.logOut();
         Future.delayed(const Duration(seconds: 2)).then((val) {
           Get.offNamedUntil('/secondary-splash', (route) => false);
-          // Get.offNamedUntil('/splash', (route) => false);
         });
       }
+      break;
 
     case HttpStatus.forbidden:
-      showBasicFailedSnackBar(
-          message: json.decode(response.body.toString())["message"]);
+      _showSnackBar(json.decode(response.body.toString())["message"]);
       throw UnauthorisedException(response.body.toString());
+
     case HttpStatus.internalServerError:
     default:
-      showBasicFailedSnackBar(
-          message: json.decode(response.body.toString())["message"]);
+      _showSnackBar(json.decode(response.body.toString())["message"]);
       throw json.decode(response.body.toString());
   }
 }
