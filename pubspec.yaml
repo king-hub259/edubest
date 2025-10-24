@@ -26,9 +26,7 @@ dependencies:
   http: ^1.2.2
   file_utils: ^1.0.1
   flutter_cache_manager: ^3.4.1
-  open_filex:
-    git:
-    open_filex: ^4.4.0
+  open_filex: ^4.4.0
   permission_handler: ^11.3.1
   flutter_calendar_carousel: ^2.4.4
   image_picker: ^1.1.2
