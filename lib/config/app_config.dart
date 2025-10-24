@@ -7,7 +7,7 @@ class AppConfig {
   static String domainName = 'https://spondan.com/spn4/app/infixedu/ios';
   static String imageBaseUrl = 'https://spondan.com/spn4/app/infixedu/ios';
 
-  static String appName = "InfixEdu";
+  static String appName = "EDUBEST";
 
   static bool isDemo = false;
 
