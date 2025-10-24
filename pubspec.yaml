@@ -1,7 +1,7 @@
-name: infixedu
+name: EDUBEST
 version: 1.0.1+7
 publish_to: none
-description: InfixEdu Learning Management System
+description: EDUBEST Learning Management System
 environment:
   sdk: '>=3.1.3 <4.0.0'
 
@@ -28,7 +28,7 @@ dependencies:
   flutter_cache_manager: ^3.4.1
   open_filex:
     git:
-      url: https://github.com/mufassalhussain/open_filex.git
+    open_filex: ^4.4.0
   permission_handler: ^11.3.1
   flutter_calendar_carousel: ^2.4.4
   image_picker: ^1.1.2
