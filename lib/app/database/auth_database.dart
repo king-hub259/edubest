@@ -1,9 +1,8 @@
 import 'dart:convert';
 import 'dart:developer';
-
 import 'package:flutter/cupertino.dart';
-import 'package:infixedu/config/global_variable/global_variable_controller.dart';
-import 'package:infixedu/config/language/controller/language_controller.dart';
+import 'package:edubest/config/global_variable/global_variable_controller.dart';
+import 'package:edubest/config/language/controller/language_controller.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -25,7 +24,6 @@ class AuthDatabase {
 
   Future<bool> saveAuthInfo({
     required ProfileInfoModel profileInfoModelModel,
-    // String? token,
   }) async {
     try {
       final storage = GetStorage(AuthDBKeys.dbName);
@@ -84,7 +82,6 @@ class AuthDatabase {
   String? getToken() {
     try {
       final storage = GetStorage(AuthDBKeys.dbName);
-      // debugPrint('Your token is:::: ${storage.read(AuthDBKeys.token)}');
       return storage.read(AuthDBKeys.token);
     } catch (e) {
       rethrow;
