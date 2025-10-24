@@ -1,8 +1,8 @@
 import 'package:flutter_paystack_max/flutter_paystack_max.dart';
 
 class AppConfig {
-  // static String domainName = 'https://infixedu.ischooll.com';
-  // static String imageBaseUrl = 'https://infixedu.ischooll.com';
+  // static String domainName = 'https://edubest.com.ng';
+  // static String imageBaseUrl = 'https://edubest.com.ng';
 
   static String domainName = 'https://spondan.com/spn4/app/infixedu/ios';
   static String imageBaseUrl = 'https://spondan.com/spn4/app/infixedu/ios';
